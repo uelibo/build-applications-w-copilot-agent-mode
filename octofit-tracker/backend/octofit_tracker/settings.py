@@ -25,7 +25,7 @@ SECRET_KEY = "django-insecure-zaav!-xa&=ag4^5-0lo6o^k$51h$%2)y6t!tqm30ytsrqn&r^3
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['*']
 
 
 # Application definition
@@ -37,12 +37,9 @@ INSTALLED_APPS = [
     "django.contrib.sessions",
     "django.contrib.messages",
     "django.contrib.staticfiles",
-]
-
-INSTALLED_APPS += [
-    "rest_framework",
     "corsheaders",
     "djongo",
+    "octofit_tracker",
 ]
 
 MIDDLEWARE = [
@@ -55,7 +52,7 @@ MIDDLEWARE = [
     "django.middleware.clickjacking.XFrameOptionsMiddleware",
 ]
 
-MIDDLEWARE.insert(1, "corsheaders.middleware.CorsMiddleware")
+MIDDLEWARE.insert(0, 'corsheaders.middleware.CorsMiddleware')
 
 ROOT_URLCONF = "octofit_tracker.urls"
 
@@ -81,12 +78,18 @@ WSGI_APPLICATION = "octofit_tracker.wsgi.application"
 # Database
 # https://docs.djangoproject.com/en/4.1/ref/settings/#databases
 
-dATABASES = {
-    "default": {
-        "ENGINE": "djongo",
-        "NAME": "octofit_db",
+# Datenbankkonfiguration für MongoDB hinzufügen
+DATABASES = {
+    'default': {
+        'ENGINE': 'djongo',
+        'NAME': 'octofit_db',
+        'HOST': 'localhost',
+        'PORT': 27017,
     }
 }
+
+CORS_ALLOW_ALL_ORIGINS = True
+ALLOWED_HOSTS = ['*']
 
 
 # Password validation
